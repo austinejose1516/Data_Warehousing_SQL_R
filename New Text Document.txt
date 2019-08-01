@@ -1,0 +1,8 @@
+load csv with headers from "file:///Product.csv" as p_row create (P:Product) set P = p_row {EntityID:p_row.BusinessEntityID, Name:p_row.Name} 
+
+
+load csv with headers from "file:///Vendor.csv" as v_row create (V:Vendor) set V = v_row {EntityID: v_row.BusinessEntityID,  VendorName: v_row.VendorName}
+
+
+
+MATCH (P:Product), (V:Vendor) WHERE P.EntityID = V.EntityID CREATE (P) - [r:From] -> (V) 
